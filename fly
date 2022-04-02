@@ -1,0 +1,26 @@
+local cam = workspace.Camera
+local plr = game.Players.LocalPlayer
+local tor = plr.Character:WaitForChild('HumanoidRootPart')
+local UserInputService = game:GetService("UserInputService")
+local mouse = plr:GetMouse()
+local function down()
+	return UserInputService:IsKeyDown(Enum.KeyCode.E)
+end
+local function Input(input, gameProcessedEvent)
+	if down() and input.KeyCode == Enum.KeyCode.E then
+	    plr.Character.Humanoid.PlatformStand = true
+	    repeat wait()
+	        if plr.Character.Humanoid then
+	        tor.Anchored = true
+	        local RootPos, MousePos = tor.Position, mouse.Hit.Position
+	        tor.CFrame = CFrame.new(RootPos, Vector3.new(MousePos.X, MousePos.Y, MousePos.Z))
+	        tor.CFrame = tor.CFrame * CFrame.new((CFrame.new(0,0,-25) * cam.CFrame.lookVector * 0.2))
+	        end
+	    until not down()
+        tor.Anchored = false
+        if tor then
+        plr.Character.Humanoid.PlatformStand = false
+        end
+	end
+end
+UserInputService.InputBegan:Connect(Input)
