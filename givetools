@@ -1,0 +1,14 @@
+local cf = Instance.new("Part",workspace)
+cf.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+cf.Anchored = true
+cf.CanCollide = false
+for _, v in pairs(workspace["made byFoxBin MK2"]:GetDescendants()) do
+    if v:IsA("Decal") and v.Parent.Name == "Button_PaintBucket" and string.find(v.Texture, "483057119") then
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Parent.CFrame
+        wait(.1)
+        fireclickdetector(v.Parent.ClickDetector)
+    end
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = cf.CFrame
+    game.Players.LocalPlayer.Character.Humanoid.PlatformStand = false
+    cf:Destroy()
+end
